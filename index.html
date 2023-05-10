@@ -1,106 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
+
+  <!DOCTYPE html>
+  <html lang="nl">
+  
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
-  color: #0098c4ff;
-  font-family: 'Roboto';
-  line-height: 1.2;
-}
+        color: #0098c4ff;
+        font-family: 'Roboto';
+        line-height: 1.2;
+      }
+  
       h1 {
         /*font-size: calc(4vw + 4vh + 2vmin);*/
-       font-size: 5VW;
+        font-size: 10VW;
+        font-weight: bold;
       }
+  
       table {
         border-collapse: collapse;
         /*border: 1px solid black;*/
       }
-
-      th,
-      /*td {
-        border: 1px solid black;
-      }*/
-
+      table.gegevens{
+        font-size: 4,4vw;
+        font-weight: bold;
+        font-display: ju;
+      }
       table.a {
         table-layout: auto;
         width: 100%;
       }
+  
       img {
-        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0%;
       }
-      .RentalenMore {
-        position: relative;
-        text-align: center;
-        color: white;
-      }
+  
     
-      .modeltype {
-        position: absolute;
-        top: 55%;
-        left: 14%;
-        transform: translate(-50%, -50%);
+      figure {
+        display: table;
+        position: relative;
+        text-align: left;
+        color: white;
+        padding: 4px;
+        margin: 2rem 0;
+        margin-top: 0%;
+        margin-bottom: 0%;
       }
-      img {
-  max-width: 480px;
-  height: auto;
-}
-    </style>
-    <title>450AJ</title>
-  </head>
-  <body>
-    <div class="RentalenMore">
-      <object type="image/svg+xml" data="Euromat-QR-Background-web.svg">
-        <img
-          src="./Hoogtewerker/images/Euromat-QR-Background-Web2.svg"
-          alt="Euromat Rental & More"
-        />
-         <div class="modeltype"><h1>450AJ</h1></div>
-      </object>
-     
-    </div>
-   <p></p>
-    <table class="a">
-      <tr>
-        <td>Serienr: <b>E300001058</b></td>
-        <td>Huurvlootnr: <b>05734</b></td>
-      </tr>
-    </table>
-    <p></p>
-    <a href="./Hoogtewerker/HOOGTEWERKER 450AJ/HANDLEIDINGEN/Handleiding Hoogtewerker 450AJ JLG NL serie 2.pdf">Handleiding 450AJ JLG NL serie 2</a><br>
-    <a href="./Hoogtewerker/HOOGTEWERKER 450AJ/HOOGTEWERKER 450 AJ - E300001058 HV05734/CE E300001058.pdf">CE Attest</a>
-    <p></p>
-    <img src="./Hoogtewerker/images/450AJ.jpg" alt="450AJ" />
-    <p></p>
-    <div id="dataTableArea">
-      <table>
-        <tr>
-          <td>Windsnelheid: <b> 12.5 m/s 6 beaufort</b></td>
-        </tr>
-        <tr>
-          <td>Platform Hoogte: <b> 13,72m</b></td>
-        </tr>
-        <tr>
-          <td>Platform Capaciteit: <b>250kg</b></td>
-        </tr>
-        <tr>
-          <td>Horizontaal Bereik: <b>7,62m</b></td>
-        </tr>
-        <tr>
-          <td>Gewicht: <b>6418kg</b></td>
-        </tr>
-        <tr>
-          <td>Banden: <b>Schuim gevuld</b></td>
-        </tr>
-        <tr>
-          <td>Max helling <b>30° lengterichting</b></td>
-        </tr>
-        <tr>
-          <td>Max helling <b>4° dwars</b></td>
-        </tr>
-      </table>
-    </div>
-  </body>
-</html>
+  
+      figcaption {
+        display:table-caption;
+        color: rgb(194, 36, 36);
+        font-size: 5vw;
+        font-weight: bold;
+      }
+  
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+      }
+      
+      @media only screen and (min-width: 768px) {
+        /* styles for desktop */
+        header {
+          /* add header styles */
+        }
+        
+        footer {
+          /* add footer styles */
+        }
+      }
+      .container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              height: 100vh;
+          }
+          form {
+              display: inline-block;
+          }
+          input[type="text"], button {
+              padding: 10px;
+              font-size: 16px;
+              border: none;
+              border-radius: 5px;
+          }
+          input[type="text"] {
+              width: 300px;
+          }
+          button {
+              background-color: #0098c4ff;
+              color: white;
+              cursor: pointer;
+          }
+      #foutmelding {
+        display: none;
+        color: red;
+      }
+      </style>
+</head>
+<body>
+	<div class="container">
+		<h2>Huurnummer of serienumer aub</h2>
+		<form>
+			<input type="text" id="zoekterm" name="search" placeholder="Zoeken...">
+			<button type="submit">Zoeken</button>
+		</form>
+		<p id="foutmelding" style="display:none; color:red;"></p>
+	</div>
+	<script>
+		var zoekwoorden = [
+			{ term: "450AJ", url: "./Hoogtewerker/HOOGTEWERKER 450AJ/HOOGTEWERKER 450 AJ - E300001058 HV05734/450AJ.html" },
+			{ term: "term2", url: "pagina2.html" },
+			{ term: "term3", url: "pagina3.html" }
+		];
+
+		function zoektermVerwerken() {
+			var zoekterm = document.getElementsByName("search")[0].value;
+			for (var i = 0; i < zoekwoorden.length; i++) {
+				if (zoekterm === zoekwoorden[i].term) {
+					window.location.href = zoekwoorden[i].url;
+					return true;
+				}
+			}
+			document.getElementById("foutmelding").style.display = "block";
+			document.getElementById("foutmelding").textContent = "De zoekterm '" + zoekterm + "' werd niet gevonden.";
+			return false;
+		}
+
+		document.querySelector("form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			zoektermVerwerken();
+		});
+	</script>
+</body>
+  </html>
