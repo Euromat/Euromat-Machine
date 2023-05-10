@@ -115,30 +115,38 @@
 		</form>
 		<p id="foutmelding" style="display:none; color:red;"></p>
 	</div>
-	<script>
-		var zoekwoorden = [
-			{ term: "450AJ", url: "./Hoogtewerker/HOOGTEWERKER 450AJ/HOOGTEWERKER 450 AJ - E300001058 HV05734/450AJ.html" },
-			{ term: "term2", url: "pagina2.html" },
-			{ term: "term3", url: "pagina3.html" }
-		];
-
-		function zoektermVerwerken() {
-			var zoekterm = document.getElementsByName("search")[0].value;
-			for (var i = 0; i < zoekwoorden.length; i++) {
-				if (zoekterm === zoekwoorden[i].term) {
-					window.location.href = zoekwoorden[i].url;
-					return true;
-				}
-			}
-			document.getElementById("foutmelding").style.display = "block";
-			document.getElementById("foutmelding").textContent = "De zoekterm '" + zoekterm + "' werd niet gevonden.";
-			return false;
-		}
-
-		document.querySelector("form").addEventListener("submit", function(e) {
-			e.preventDefault();
-			zoektermVerwerken();
-		});
-	</script>
+  <script>
+    var zoekwoorden = [
+      { url: "./Hoogtewerker/HOOGTEWERKER 450AJ/HOOGTEWERKER 450 AJ - E300001058 HV05734/450AJ.html", zoektermen: ["450AJ", "HV05734"] },
+      { url: "./Hoogtewerker/HOOGTEWERKER 600AJ/HOOGTEWERKER 600AJ - 0300258053 HV190461/600AJ.html", zoektermen: ["600AJ", "HV190461"] },
+      { url: "pagina3.html", zoektermen: ["term3"] }
+    ];
+  
+    function zoektermVerwerken() {
+      var zoektermen = document.getElementsByName("search")[0].value.split(" ");
+      var gevondenObject = null;
+      for (var i = 0; i < zoekwoorden.length; i++) {
+        var object = zoekwoorden[i];
+        if (zoektermen.every(function(term) { return object.zoektermen.indexOf(term) >= 0 })) {
+          gevondenObject = object;
+          break;
+        }
+      }
+      if (gevondenObject !== null) {
+        window.location.href = gevondenObject.url;
+        return true;
+      } else {
+        document.getElementById("foutmelding").style.display = "block";
+        document.getElementById("foutmelding").textContent = "Geen resultaten gevonden voor de zoektermen '" + zoektermen.join(" ") + "'.";
+        return false;
+      }
+    }
+  
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      zoektermVerwerken();
+    });
+  </script>
+  
 </body>
   </html>
